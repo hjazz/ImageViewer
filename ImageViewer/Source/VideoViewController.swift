@@ -22,7 +22,7 @@ class VideoViewController: ItemBaseController<VideoView> {
 
     let fullHDScreenSizeLandscape = CGSize(width: 1920, height: 1080)
     let fullHDScreenSizePortrait = CGSize(width: 1080, height: 1920)
-    let embeddedPlayButton = UIButton.circlePlayButton(70)
+    let embeddedPlayButton = UIButton.circlePlayButton(58)
     
     private var autoPlayStarted: Bool = false
     private var autoPlayEnabled: Bool = false
