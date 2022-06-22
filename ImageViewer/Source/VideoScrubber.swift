@@ -15,7 +15,7 @@ open class VideoScrubber: UIControl {
     let pauseButton = UIButton.pauseButton(width: 50, height: 40)
     let replayButton = UIButton.replayButton(width: 50, height: 40)
 
-    let scrubber = Slider.createSlider(320, height: 20, pointerDiameter: 10, barHeight: 2)
+    let scrubber = Slider.createSlider(320, height: 20, pointerDiameter: 5, barHeight: 2)
     let timeLabel = UILabel(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 50, height: 20)))
     var duration: TimeInterval?
     fileprivate var periodicObserver: AnyObject?
@@ -25,9 +25,7 @@ open class VideoScrubber: UIControl {
     fileprivate var timeLabelAttributes:  [NSAttributedString.Key : Any] {
         var attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]
         
-        if let tintColor = tintColor {
-            attributes[NSAttributedString.Key.foregroundColor] = tintColor
-        }
+        attributes[NSAttributedString.Key.foregroundColor] = UIColor.black
         
         return attributes
     }
@@ -297,6 +295,8 @@ open class VideoScrubber: UIControl {
             let highlightImage = self.image(replayButtonImage, with: self.tintColor.shadeDarker()) as UIImage? {
             replayButton.setImage(highlightImage, for: .highlighted)
         }
+        
+        scrubber.tintColor = self.tintColor
     }
     
     func image(_ image: UIImage, with color: UIColor) -> UIImage? {
