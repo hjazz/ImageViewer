@@ -86,6 +86,8 @@ class VideoViewController: ItemBaseController<VideoView> {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        embeddedPlayButton.isHidden = false
+        embeddedPlayButton.alpha = 1
         performAutoPlay()
     }
 
@@ -134,7 +136,6 @@ class VideoViewController: ItemBaseController<VideoView> {
             UIView.animate(withDuration: 0.15, animations: { [weak self] in
                 self?.embeddedPlayButton.alpha = 1
             })
-            self.embeddedPlayButton.isHidden = false
         }
 
         super.presentItem(alongsideAnimation: alongsideAnimation) {
