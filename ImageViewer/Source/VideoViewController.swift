@@ -134,6 +134,7 @@ class VideoViewController: ItemBaseController<VideoView> {
             UIView.animate(withDuration: 0.15, animations: { [weak self] in
                 self?.embeddedPlayButton.alpha = 1
             })
+            self.embeddedPlayButton.isHidden = false
         }
 
         super.presentItem(alongsideAnimation: alongsideAnimation) {
