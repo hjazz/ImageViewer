@@ -139,15 +139,13 @@ open class VideoScrubber: UIControl {
         pauseButton.frame = playButton.frame
         replayButton.frame = playButton.frame
 
-        timeLabel.center = self.boundsCenter
+        timeLabel.center = playButton.center
         timeLabel.frame.origin.x = self.bounds.maxX - timeLabel.bounds.width - 10
-        timeLabel.frame.origin.y = 10
 
         scrubber.bounds.size.width = self.bounds.width - playButton.bounds.width - timeLabel.bounds.width - 20
         scrubber.bounds.size.height = 20
-        scrubber.center = self.boundsCenter
+        scrubber.center = playButton.center
         scrubber.frame.origin.x = playButton.frame.maxX
-        scrubber.frame.origin.y = 10
     }
 
     open override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
