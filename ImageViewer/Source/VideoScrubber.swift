@@ -25,7 +25,7 @@ open class VideoScrubber: UIControl {
     fileprivate var timeLabelAttributes:  [NSAttributedString.Key : Any] {
         var attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]
         
-        attributes[NSAttributedString.Key.foregroundColor] = UIColor.black
+        attributes[NSAttributedString.Key.foregroundColor] = UIColor.white
         
         return attributes
     }
@@ -110,6 +110,7 @@ open class VideoScrubber: UIControl {
         self.clipsToBounds = true
         pauseButton.isHidden = true
         replayButton.isHidden = true
+        self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
 
         scrubber.minimumValue = 0
         scrubber.maximumValue = 1000
@@ -133,14 +134,14 @@ open class VideoScrubber: UIControl {
         super.layoutSubviews()
 
         playButton.center = self.boundsCenter
-        playButton.frame.origin.x = 0
+        playButton.frame.origin.x = 10
         pauseButton.frame = playButton.frame
         replayButton.frame = playButton.frame
 
         timeLabel.center = self.boundsCenter
-        timeLabel.frame.origin.x = self.bounds.maxX - timeLabel.bounds.width
+        timeLabel.frame.origin.x = self.bounds.maxX - timeLabel.bounds.width - 10
 
-        scrubber.bounds.size.width = self.bounds.width - playButton.bounds.width - timeLabel.bounds.width
+        scrubber.bounds.size.width = self.bounds.width - playButton.bounds.width - timeLabel.bounds.width - 20
         scrubber.bounds.size.height = 20
         scrubber.center = self.boundsCenter
         scrubber.frame.origin.x = playButton.frame.maxX
