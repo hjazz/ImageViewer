@@ -135,7 +135,7 @@ open class VideoScrubber: UIControl {
 
         playButton.center = self.boundsCenter
         playButton.frame.origin.x = 10
-        playButton.frame.origin.y = 10
+        playButton.frame.origin.y = 5
         pauseButton.frame = playButton.frame
         replayButton.frame = playButton.frame
 
