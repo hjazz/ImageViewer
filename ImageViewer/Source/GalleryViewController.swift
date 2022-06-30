@@ -256,11 +256,11 @@ open class GalleryViewController: UIPageViewController, ItemControllerDelegate {
         }
 
         configureHeaderView()
+        configureScrubber()
         configureFooterView()
         configureCloseButton()
         configureThumbnailsButton()
         configureDeleteButton()
-        configureScrubber()
 
         self.view.clipsToBounds = false
     }
