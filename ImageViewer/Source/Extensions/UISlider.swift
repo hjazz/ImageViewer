@@ -34,7 +34,7 @@ extension Slider {
     
     override func tintColorDidChange() {
         self.minimumTrackTintColor = self.tintColor
-        self.maximumTrackTintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 50)
+        self.maximumTrackTintColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.5)
         
         // Correct way would be setting self.thumbTintColor however this has a bug which changes the thumbImage frame
         let image = self.currentThumbImage?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
