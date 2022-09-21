@@ -21,6 +21,8 @@ open class VideoScrubber: UIControl {
     fileprivate var periodicObserver: AnyObject?
     fileprivate var stoppedSlidingTimeStamp = Date()
     
+    weak var embeddedPlayButton: UIButton?
+    
     /// The attributes dictionary used for the timeLabel
     fileprivate var timeLabelAttributes:  [NSAttributedString.Key : Any] {
         var attributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 12)]
@@ -60,7 +62,7 @@ open class VideoScrubber: UIControl {
                 player.addObserver(self, forKeyPath: "rate", options: NSKeyValueObservingOptions.new, context: nil)
 
                 ///NC
-                NotificationCenter.default.addObserver(self, selector: #selector(didEndPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+                NotificationCenter.default.addObserver(self, selector: #selector(didEndPlaying(notification:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
 
                 ///TIMER
                 periodicObserver = player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil, using: { [weak self] time in
@@ -95,13 +97,13 @@ open class VideoScrubber: UIControl {
             player?.removeTimeObserver(periodicObserver)
             self.periodicObserver = nil
         }
+        
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
 
-    @objc func didEndPlaying() {
-
-        self.playButton.isHidden = true
-        self.pauseButton.isHidden = true
-        self.replayButton.isHidden = false
+    @objc func didEndPlaying(notification: Foundation.Notification) {
+        guard notification.object as? AVPlayerItem == self.player?.currentItem else { return }
+        updateButtons()
     }
 
     func setup() {
@@ -205,6 +207,8 @@ open class VideoScrubber: UIControl {
 
             self.playButton.isHidden = player.isPlaying()
             self.pauseButton.isHidden = !self.playButton.isHidden
+            self.embeddedPlayButton?.isHidden = self.playButton.isHidden
+            self.embeddedPlayButton?.alpha = self.playButton.isHidden ? 0 : 1
             self.replayButton.isHidden = true
         }
     }

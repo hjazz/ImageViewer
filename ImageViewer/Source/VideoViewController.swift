@@ -31,6 +31,7 @@ class VideoViewController: ItemBaseController<VideoView> {
 
         self.videoURL = videoURL
         self.scrubber = scrubber
+        self.scrubber.embeddedPlayButton = embeddedPlayButton
         self.player = AVPlayer(url: self.videoURL)
         
         ///Only those options relevant to the paging VideoViewController are explicitly handled here, the rest is handled by ItemViewControllers
@@ -79,6 +80,8 @@ class VideoViewController: ItemBaseController<VideoView> {
         self.player.removeObserver(self, forKeyPath: "rate")
 
         UIApplication.shared.endReceivingRemoteControlEvents()
+        
+        autoPlayStarted = true
 
         super.viewWillDisappear(animated)
     }
@@ -197,10 +200,12 @@ class VideoViewController: ItemBaseController<VideoView> {
                     if self.player.isPlaying()  {
 
                         self.player.pause()
+                        
                     }
                     else {
 
                         self.player.play()
+                        
                     }
 
                 case .remoteControlPause:
@@ -228,6 +233,7 @@ class VideoViewController: ItemBaseController<VideoView> {
     private func performAutoPlay() {
         guard autoPlayEnabled else { return }
         guard autoPlayStarted == false else { return }
+        guard isInitialController else { return }
         
         autoPlayStarted = true
         embeddedPlayButton.isHidden = true
