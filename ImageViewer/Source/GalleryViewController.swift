@@ -487,6 +487,12 @@ open class GalleryViewController: UIPageViewController, ItemControllerDelegate {
         }
     }
 
+    /// 현재 페이지를 새로고침합니다.
+    open func refresh() {
+        let imageViewController = self.pagingDataSource.createItemController(currentIndex)
+        setViewControllers([imageViewController], direction: .forward, animated: false)
+    }
+
     func removePage(atIndex index: Int, completion: @escaping () -> Void) {
 
         // If removing last item, go back, otherwise, go forward
